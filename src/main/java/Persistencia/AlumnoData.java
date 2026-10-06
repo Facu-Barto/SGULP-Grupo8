@@ -1,5 +1,5 @@
 package Persistencia;
 
-public class alumnoData {
+public class AlumnoData {
 
 }

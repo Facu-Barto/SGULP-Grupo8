@@ -10,4 +10,12 @@
         <maven.compiler.release>25</maven.compiler.release>
         <exec.mainClass>com.mycompany.proyectotransversal.grupo8.ProyectoTransversalGrupo8</exec.mainClass>
     </properties>
+    <dependencies>
+        <!--Conector MariaDB-->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.3.3</version>
+        </dependency>
+    </dependencies>
 </project>

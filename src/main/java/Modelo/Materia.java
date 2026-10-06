@@ -1,14 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-package com.mycompany.proyectotransversal.grupo8;
+package Modelo;
 
 public class Materia {
-private int idMateria;
-private String nombreMateria;
-private boolean estado;
+    private int idMateria;
+    private String nombreMateria;
+    private boolean estado;
 
     public Materia(int idMateria, String nombreMateria, boolean estado) {
         this.idMateria = idMateria;
@@ -39,7 +34,4 @@ private boolean estado;
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
- 
-
-
 }

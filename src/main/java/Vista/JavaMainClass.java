@@ -1,14 +1,14 @@
 package Vista;
 
 import Modelo.Alumno;
+import Modelo.Inscripcion;
 import Modelo.Materia;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import Persistencia.AlumnoData;
+import Persistencia.InscripcionData;
+import Persistencia.MateriaData;
+import java.util.List;
 import java.time.LocalDate;
 import java.time.Month;
-import javax.swing.JOptionPane;
 
 public class JavaMainClass extends javax.swing.JFrame {
     
@@ -50,23 +50,28 @@ public class JavaMainClass extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        try {
-            //Cargar driver de conexion.
-            Class.forName("org.mariadb.jdbC.Driver");
-            //Conexion a la base de datos.
-            Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost/sgulp","root", "");
-            
-            String sql = "insert into Materia (nombre,anio,estado) values ('Matematica', 1, true)";
-            
-            PreparedStatement ps = conn.prepareStatement(sql);
-            int filas = ps.executeUpdate();
-            if (filas > 0){
-                JOptionPane.showMessageDialog(null, "Materia Agregada Existosamente");
-            }
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null,"Debe agregar los driver al proyecto !!!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error De Conexion");
+        // Instanciar las clases DAO
+        AlumnoData aluData = new AlumnoData();
+        MateriaData matData = new MateriaData();
+        InscripcionData insData = new InscripcionData();
+
+        // 1. Guardar Alumno
+        Alumno alumno = new Alumno(52745628, "Juan", "López", LocalDate.of(2000, Month.AUGUST, 29), true);
+        aluData.guardarAlumno(alumno);
+
+        // 2. Guardar Materia
+        Materia materia = new Materia("Matemática I", 1, true);
+        matData.guardarMateria(materia);
+
+        // 3. Registrar Inscripción
+        Inscripcion inscripcion = new Inscripcion(alumno, materia, 9.5f, 85, 2026);
+        insData.guardarInscripcion(inscripcion);
+
+        // 4. Listar Alumnos Activos
+        System.out.println("\n--- LISTA DE ALUMNOS ACTIVOS ---");
+        List<Alumno> activos = aluData.listarAlumnosActivos();
+        for (Alumno a : activos) {
+            System.out.println(a);
         }
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -88,7 +93,6 @@ public class JavaMainClass extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new JavaMainClass().setVisible(true));
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

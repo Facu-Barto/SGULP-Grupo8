@@ -1,30 +1,40 @@
 package Modelo;
 
 public class Materia {
-    private int idMateria;
-    private String nombreMateria;
+    private int id_materia;
+    private String nombre;
+    private int anio;
     private boolean estado;
 
-    public Materia(int idMateria, String nombreMateria, boolean estado) {
-        this.idMateria = idMateria;
-        this.nombreMateria = nombreMateria;
+    public Materia() {}
+
+    public Materia(String nombre, int anio, boolean estado) {
+        this.nombre = nombre;
+        this.anio = anio;
         this.estado = estado;
     }
 
-    public int getIdMateria() {
-        return idMateria;
+    public Materia(int id_materia, String nombre, int anio, boolean estado) {
+        this.id_materia = id_materia;
+        this.nombre = nombre;
+        this.anio = anio;
+        this.estado = estado;
     }
 
-    public void setIdMateria(int idMateria) {
-        this.idMateria = idMateria;
+    public int getId_materia() {
+        return id_materia;
     }
 
-    public String getNombreMateria() {
-        return nombreMateria;
+    public void setId_materia(int id_materia) {
+        this.id_materia = id_materia;
     }
 
-    public void setNombreMateria(String nombreMateria) {
-        this.nombreMateria = nombreMateria;
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public boolean isEstado() {
@@ -33,5 +43,18 @@ public class Materia {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public int getAnio() {
+        return anio;
+    }
+
+    public void setAnio(int anio) {
+        this.anio = anio;
+    }
+    
+    @Override
+    public String toString() {
+        return id_materia + " - " + nombre + " (" + anio + "º Año)";
     }
 }

@@ -1,9 +1,19 @@
 package Vista;
 
+import Modelo.Alumno;
+import Modelo.Materia;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Month;
+import javax.swing.JOptionPane;
+
 public class JavaMainClass extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(JavaMainClass.class.getName());
-
+    
     /**
      * Creates new form JavaMainClass
      */
@@ -40,6 +50,24 @@ public class JavaMainClass extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        try {
+            //Cargar driver de conexion.
+            Class.forName("org.mariadb.jdbC.Driver");
+            //Conexion a la base de datos.
+            Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost/sgulp","root", "");
+            
+            String sql = "insert into Materia (nombre,anio,estado) values ('Matematica', 1, true)";
+            
+            PreparedStatement ps = conn.prepareStatement(sql);
+            int filas = ps.executeUpdate();
+            if (filas > 0){
+                JOptionPane.showMessageDialog(null, "Materia Agregada Existosamente");
+            }
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null,"Debe agregar los driver al proyecto !!!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error De Conexion");
+        }
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -60,7 +88,7 @@ public class JavaMainClass extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new JavaMainClass().setVisible(true));
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

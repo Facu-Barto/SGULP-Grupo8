@@ -1,5 +1,5 @@
-package Persistencia;
+package persistencia;
 
 public class Conexion {
-
+    
 }

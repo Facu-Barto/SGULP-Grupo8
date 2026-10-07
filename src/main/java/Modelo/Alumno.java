@@ -3,21 +3,41 @@ package Modelo;
 import java.time.LocalDate;
 
 public class Alumno {
+    private int id_alumno;
     private int dni;
     private String nombre;
-    private LocalDate fechaNac;
+    private String apellido;
+    private LocalDate fecha_nacimiento;
     private boolean activo;
-
-    public Alumno(int dni, String nombre, LocalDate fechaNac, boolean activo) {
-        this.dni = dni;
-        this.nombre = nombre;
-        this.fechaNac = fechaNac;
-        this.activo = activo;
-    }
 
     public Alumno() {
     }
 
+    public Alumno(int dni, String apellido, String nombre, LocalDate fecha_nacimiento, boolean activo) {
+        this.dni = dni;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.activo = activo;
+    }
+
+    public Alumno(int idAlumno, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean activo) {
+        this.id_alumno = idAlumno;
+        this.dni = dni;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.fecha_nacimiento = fechaNacimiento;
+        this.activo = activo;
+    }
+
+    public int getId_alumno() {
+        return id_alumno;
+    }
+
+    public void setId_alumno(int id_alumno) {
+        this.id_alumno = id_alumno;
+    }
+    
     public int getDni() {
         return dni;
     }
@@ -26,6 +46,14 @@ public class Alumno {
         this.dni = dni;
     }
 
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -34,12 +62,12 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public LocalDate getFechaNac() {
-        return fechaNac;
+    public LocalDate getFecha_nacimiento() {
+        return fecha_nacimiento;
     }
 
-    public void setFechaNac(LocalDate fechaNac) {
-        this.fechaNac = fechaNac;
+    public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
     }
 
     public boolean isActivo() {
@@ -52,6 +80,6 @@ public class Alumno {
 
     @Override
     public String toString() {
-        return "Alumno{" + "dni=" + dni + ", nombre=" + nombre + ", fechaNac=" + fechaNac + ", activo=" + activo + '}';
+        return id_alumno + " - " + apellido + " " + nombre + " (DNI: " + dni + ")";
     }
 }

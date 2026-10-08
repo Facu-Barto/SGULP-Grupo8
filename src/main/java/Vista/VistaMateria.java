@@ -56,7 +56,7 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         txt_code.setText("Código / ID");
         jDesktopPane1.add(txt_code, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
-        field_nombremateria.setText("Nombre de materia");
+        field_nombremateria.setText("Nombre materia");
         jDesktopPane1.add(field_nombremateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 180, -1));
 
         field_idmateria.setText("ID de materia");

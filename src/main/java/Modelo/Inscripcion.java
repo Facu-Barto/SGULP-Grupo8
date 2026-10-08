@@ -9,11 +9,8 @@ public class Inscripcion {
     private int asistencia;
     private int cursa;
 
-    // Constructor vacío
-    public Inscripcion() {
-    }
+    public Inscripcion() {}
 
-    // Constructor sin id_cursada (para crear nuevas inscripciones antes de guardar en BD)
     public Inscripcion(Alumno id_alumno, Materia id_materia, float nota, int asistencia, int cursa) {
         this.id_alumno = id_alumno;
         this.id_materia = id_materia;
@@ -22,7 +19,6 @@ public class Inscripcion {
         this.cursa = cursa;
     }
 
-    // Constructor completo (para cuando leés desde la base de datos)
     public Inscripcion(int idCursada, Alumno alumno, Materia materia, float nota, int asistencia, int cursa) {
         this.id_cursada = idCursada;
         this.id_alumno = alumno;
@@ -32,7 +28,6 @@ public class Inscripcion {
         this.cursa = cursa;
     }
 
-    // Getters y Setters
     public int getId_cursada() {
         return id_cursada;
     }
@@ -83,9 +78,6 @@ public class Inscripcion {
 
     @Override
     public String toString() {
-        return "Inscripción #" + id_cursada + " | "
-                + (id_alumno != null ? id_alumno.getApellido() : "Alumno") + " - "
-                + (id_materia != null ? id_materia.getNombre() : "Materia")
-                + " | Nota: " + nota + " | Asistencia: " + asistencia + "% | Año: " + cursa;
+        return "Inscripcion{" + "id_cursada=" + id_cursada + ", id_alumno=" + id_alumno + ", id_materia=" + id_materia + ", nota=" + nota + ", asistencia=" + asistencia + ", cursa=" + cursa + '}';
     }
 }

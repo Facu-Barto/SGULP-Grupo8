@@ -52,9 +52,9 @@ public class Materia {
     public void setAnio(int anio) {
         this.anio = anio;
     }
-    
+
     @Override
     public String toString() {
-        return id_materia + " - " + nombre + " (" + anio + "º Año)";
-    }
+        return "Materia{" + "id_materia=" + id_materia + ", nombre=" + nombre + ", anio=" + anio + ", estado=" + estado + '}';
+    } 
 }

@@ -50,29 +50,25 @@ public class JavaMainClass extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        // Instanciar las clases DAO
-        AlumnoData aluData = new AlumnoData();
-        MateriaData matData = new MateriaData();
-        InscripcionData insData = new InscripcionData();
+        AlumnoData alumnoData = new AlumnoData();
+        MateriaData materiaData = new MateriaData();
+        InscripcionData inscripcionData = new InscripcionData();
 
-        // 1. Guardar Alumno
         Alumno alumno = new Alumno(52745628, "Juan", "López", LocalDate.of(2000, Month.AUGUST, 29), true);
-        aluData.guardarAlumno(alumno);
+        alumnoData.guardarAlumno(alumno);
 
-        // 2. Guardar Materia
         Materia materia = new Materia("Matemática I", 1, true);
-        matData.guardarMateria(materia);
+        materiaData.guardarMateria(materia);
 
-        // 3. Registrar Inscripción
         Inscripcion inscripcion = new Inscripcion(alumno, materia, 9.5f, 85, 2026);
-        insData.guardarInscripcion(inscripcion);
+        inscripcionData.guardarInscripcion(inscripcion);
 
-        // 4. Listar Alumnos Activos
-        System.out.println("\n--- LISTA DE ALUMNOS ACTIVOS ---");
-        List<Alumno> activos = aluData.listarAlumnosActivos();
+        System.out.println("\n---Lista De Alumnos Activos---");
+        List<Alumno> activos = alumnoData.listarAlumnosActivos();
         for (Alumno a : activos) {
             System.out.println(a);
         }
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

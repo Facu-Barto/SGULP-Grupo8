@@ -136,6 +136,7 @@ public class AlumnoData {
 
             while (rs.next()) {
                 Alumno a = new Alumno();
+                
                 a.setId_alumno(rs.getInt("id_alumno"));
                 a.setDni(rs.getInt("dni"));
                 a.setNombre(rs.getString("nombre"));
@@ -145,6 +146,7 @@ public class AlumnoData {
 
                 alumnos.add(a); 
             }
+            
             ps.close();
 
         } catch (SQLException ex) {

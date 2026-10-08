@@ -22,8 +22,8 @@ public class MateriaData {
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnio());
             ps.setBoolean(3, materia.isEstado());
-            
             ps.executeUpdate();
+            
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 materia.setId_materia(rs.getInt(1));

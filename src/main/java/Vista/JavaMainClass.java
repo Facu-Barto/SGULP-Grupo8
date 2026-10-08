@@ -64,7 +64,7 @@ public class JavaMainClass extends javax.swing.JFrame {
         inscripcionData.guardarInscripcion(inscripcion);
 
         System.out.println("\n---Lista De Alumnos Activos---");
-        List<Alumno> activos = alumnoData.listarAlumnosActivos();
+        List<Alumno> activos = alumnoData.listarAlumnos();
         for (Alumno a : activos) {
             System.out.println(a);
         }

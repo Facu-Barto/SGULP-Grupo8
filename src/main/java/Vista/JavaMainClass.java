@@ -30,27 +30,171 @@ public class JavaMainClass extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jdpEscritorio = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jmAlumno = new javax.swing.JMenu();
+        jmMateria = new javax.swing.JMenu();
+        jmInscripcion = new javax.swing.JMenu();
+        jmConsultas = new javax.swing.JMenu();
+        jmiListarInscrip = new javax.swing.JMenuItem();
+        jmiCargarNota = new javax.swing.JMenuItem();
+        jmSalir = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jdpEscritorio.setPreferredSize(new java.awt.Dimension(563, 410));
+
+        javax.swing.GroupLayout jdpEscritorioLayout = new javax.swing.GroupLayout(jdpEscritorio);
+        jdpEscritorio.setLayout(jdpEscritorioLayout);
+        jdpEscritorioLayout.setHorizontalGroup(
+            jdpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 618, Short.MAX_VALUE)
+        );
+        jdpEscritorioLayout.setVerticalGroup(
+            jdpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 457, Short.MAX_VALUE)
+        );
+
+        jmAlumno.setText("Alumno");
+        jmAlumno.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jmAlumnoMenuSelected(evt);
+            }
+        });
+        jMenuBar1.add(jmAlumno);
+
+        jmMateria.setText("Materia");
+        jmMateria.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jmMateriaMenuSelected(evt);
+            }
+        });
+        jMenuBar1.add(jmMateria);
+
+        jmInscripcion.setText("Inscripcion");
+        jmInscripcion.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jmInscripcionMenuSelected(evt);
+            }
+        });
+        jMenuBar1.add(jmInscripcion);
+
+        jmConsultas.setText("Consultas");
+        jmConsultas.addActionListener(this::jmConsultasActionPerformed);
+
+        jmiListarInscrip.setText("Listar Inscripciones");
+        jmiListarInscrip.addActionListener(this::jmiListarInscripActionPerformed);
+        jmConsultas.add(jmiListarInscrip);
+
+        jmiCargarNota.setText("Cargar Nota");
+        jmiCargarNota.addActionListener(this::jmiCargarNotaActionPerformed);
+        jmConsultas.add(jmiCargarNota);
+
+        jMenuBar1.add(jmConsultas);
+
+        jmSalir.setText("Salir");
+        jmSalir.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jmSalirMenuSelected(evt);
+            }
+        });
+        jmSalir.addActionListener(this::jmSalirActionPerformed);
+        jMenuBar1.add(jmSalir);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jdpEscritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jdpEscritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
+        
+    }//GEN-LAST:event_jmSalirActionPerformed
+
+    private void jmSalirMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmSalirMenuSelected
+        System.exit(0);
+    }//GEN-LAST:event_jmSalirMenuSelected
+
+    private void jmMateriaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmMateriaMenuSelected
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        VistaMateria ventana = new VistaMateria();
+        ventana.setVisible(true);
+        jdpEscritorio.add(ventana);
+        jdpEscritorio.moveToFront(ventana);
+    }//GEN-LAST:event_jmMateriaMenuSelected
+
+    private void jmAlumnoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmAlumnoMenuSelected
+        /*jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        VistaAlumnno ventana = new VistaAlumno();
+        ventana.setVisible(true);
+        jdpEscritorio.add(ventana);
+        jdpEscritorio.moveToFront(ventana);*/
+    }//GEN-LAST:event_jmAlumnoMenuSelected
+
+    private void jmInscripcionMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmInscripcionMenuSelected
+       /* jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        VistaInscripcion ventana = new VistaInscripcion();
+        ventana.setVisible(true);
+        jdpEscritorio.add(ventana);
+        jdpEscritorio.moveToFront(ventana);*/
+    }//GEN-LAST:event_jmInscripcionMenuSelected
+
+    private void jmConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultasActionPerformed
+        
+    }//GEN-LAST:event_jmConsultasActionPerformed
+
+    private void jmiListarInscripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarInscripActionPerformed
+       /* jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        VistaListarInscripciones ventana = new VistaListarInscripciones();
+        ventana.setVisible(true);
+        jdpEscritorio.add(ventana);
+        jdpEscritorio.moveToFront(ventana);*/
+    }//GEN-LAST:event_jmiListarInscripActionPerformed
+
+    private void jmiCargarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCargarNotaActionPerformed
+       /* jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        VistaCargaNotas ventana = new VistaCargaNotas();
+        ventana.setVisible(true);
+        jdpEscritorio.add(ventana);
+        jdpEscritorio.moveToFront(ventana);*/
+    }//GEN-LAST:event_jmiCargarNotaActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        AlumnoData alumnoData = new AlumnoData();
+       /* AlumnoData alumnoData = new AlumnoData();
         MateriaData materiaData = new MateriaData();
         InscripcionData inscripcionData = new InscripcionData();
 
@@ -67,7 +211,7 @@ public class JavaMainClass extends javax.swing.JFrame {
         List<Alumno> activos = alumnoData.listarAlumnos();
         for (Alumno a : activos) {
             System.out.println(a);
-        }
+        }*/
         
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -90,5 +234,14 @@ public class JavaMainClass extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new JavaMainClass().setVisible(true));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JDesktopPane jdpEscritorio;
+    private javax.swing.JMenu jmAlumno;
+    private javax.swing.JMenu jmConsultas;
+    private javax.swing.JMenu jmInscripcion;
+    private javax.swing.JMenu jmMateria;
+    private javax.swing.JMenu jmSalir;
+    private javax.swing.JMenuItem jmiCargarNota;
+    private javax.swing.JMenuItem jmiListarInscrip;
     // End of variables declaration//GEN-END:variables
 }

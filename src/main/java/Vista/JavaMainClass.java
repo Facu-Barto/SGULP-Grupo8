@@ -18,7 +18,8 @@ public class JavaMainClass extends javax.swing.JFrame {
      * Creates new form JavaMainClass
      */
     public JavaMainClass() {
-        initComponents();
+       initComponents();
+       
     }
 
     /**
@@ -151,21 +152,21 @@ public class JavaMainClass extends javax.swing.JFrame {
     }//GEN-LAST:event_jmMateriaMenuSelected
 
     private void jmAlumnoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmAlumnoMenuSelected
-        /*jdpEscritorio.removeAll();
+        jdpEscritorio.removeAll();
         jdpEscritorio.repaint();
-        VistaAlumnno ventana = new VistaAlumno();
+        VistaAlumno ventana = new VistaAlumno();
         ventana.setVisible(true);
         jdpEscritorio.add(ventana);
-        jdpEscritorio.moveToFront(ventana);*/
+        jdpEscritorio.moveToFront(ventana);
     }//GEN-LAST:event_jmAlumnoMenuSelected
 
     private void jmInscripcionMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmInscripcionMenuSelected
-       /* jdpEscritorio.removeAll();
+        jdpEscritorio.removeAll();
         jdpEscritorio.repaint();
         VistaInscripcion ventana = new VistaInscripcion();
         ventana.setVisible(true);
         jdpEscritorio.add(ventana);
-        jdpEscritorio.moveToFront(ventana);*/
+        jdpEscritorio.moveToFront(ventana);
     }//GEN-LAST:event_jmInscripcionMenuSelected
 
     private void jmConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultasActionPerformed
@@ -194,9 +195,9 @@ public class JavaMainClass extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       /* AlumnoData alumnoData = new AlumnoData();
-        MateriaData materiaData = new MateriaData();
-        InscripcionData inscripcionData = new InscripcionData();
+     /*   AlumnoData alumnoData = new AlumnoData();
+       MateriaData materiaData = new MateriaData();
+       InscripcionData inscripcionData = new InscripcionData();
 
         Alumno alumno = new Alumno(52745628, "Juan", "López", LocalDate.of(2000, Month.AUGUST, 29), true);
         alumnoData.guardarAlumno(alumno);

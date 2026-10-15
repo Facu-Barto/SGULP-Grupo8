@@ -1,11 +1,14 @@
 package Persistencia;
 
 import Modelo.Inscripcion;
+import Modelo.Materia;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class InscripcionData {
@@ -38,4 +41,41 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null, "Error al registrar la inscripción: " + ex.getMessage());
         }
     }
+   
+    public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
+    List<Inscripcion> cursadas = new ArrayList<>();
+    String sql = "SELECT i.id_cursada, i.nota, i.asistencia, i.cursa, " +
+                 "m.id_materia, m.nombre, m.anio, m.estado " +
+                 "FROM inscripcion i " +
+                 "JOIN materia m ON i.id_materia = m.id_materia " +
+                 "WHERE i.id_alumno = ?";
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idAlumno);
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            Inscripcion insc = new Inscripcion();
+            insc.setId_cursada(rs.getInt("id_cursada"));
+            insc.setNota(rs.getFloat("nota"));
+            insc.setAsistencia(rs.getInt("asistencia"));
+            insc.setCursa(rs.getInt("cursa")); 
+            
+            
+            Materia m = new Materia();
+            m.setId_materia(rs.getInt("id_materia"));
+            m.setNombre(rs.getString("nombre"));
+            m.setAnio(rs.getInt("anio"));
+            m.setEstado(rs.getBoolean("estado"));
+            
+            insc.setId_materia(m);
+            
+            cursadas.add(insc);
+        }
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener inscripciones: " + ex.getMessage());
+    }
+    return cursadas;
+}
 }

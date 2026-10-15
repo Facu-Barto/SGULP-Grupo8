@@ -28,6 +28,16 @@ public class Inscripcion {
         this.cursa = cursa;
     }
 
+    public Inscripcion(Alumno alumno, Materia materia) {
+        this.id_alumno = alumno;
+        this.id_materia = materia;
+        this.nota = 0;
+        this.asistencia = 0;
+        this.cursa = 0;
+    }
+    
+    
+
     public int getId_cursada() {
         return id_cursada;
     }

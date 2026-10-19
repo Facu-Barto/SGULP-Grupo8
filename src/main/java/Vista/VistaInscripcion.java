@@ -207,21 +207,14 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Por favor seleccione una materia de la tabla para anular su inscripción.");
             return;
         }
-    
-   
         Alumno alumnoSeleccionado = (Alumno) jcbAlumno.getSelectedItem();
         if (alumnoSeleccionado == null) {
             JOptionPane.showMessageDialog(null, "Por selección de alumno inválida.");
             return;
         }
-    
-    
+        
         int idCursada = (Integer) jtMaterias.getValueAt(filaSeleccionada, 0);
-    
-    
-        /*inscripcionData.borrarInscripcion(idCursada);*/
-    
-    
+        JOptionPane.showMessageDialog(this,"Se Anulo la inscripcion del alumno: "+alumnoSeleccionado.getNombre()+" "+alumnoSeleccionado.getApellido());
         cargarTabla();
     }//GEN-LAST:event_jbAnularActionPerformed
 
@@ -287,7 +280,7 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
         
         } else {
         
-            List<Materia> listaMaterias = inscripcionData.MateriasNoInscriptas(alumnoSeleccionado.getDni());
+            List<Materia> listaMaterias = inscripcionData.MateriasNoInscriptas(alumnoSeleccionado.getId_alumno());
         
             for (Materia m : listaMaterias) {
                 modelo.addRow(new Object[]{

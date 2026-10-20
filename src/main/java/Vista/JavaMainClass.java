@@ -6,9 +6,11 @@ import Modelo.Materia;
 import Persistencia.AlumnoData;
 import Persistencia.InscripcionData;
 import Persistencia.MateriaData;
+import java.awt.Image;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.Month;
+import javax.swing.ImageIcon;
 
 public class JavaMainClass extends javax.swing.JFrame {
     
@@ -19,6 +21,10 @@ public class JavaMainClass extends javax.swing.JFrame {
      */
     public JavaMainClass() {
        initComponents();
+       ImageIcon iconoOriginal = new ImageIcon(getClass().getResource("/Iconos/logoulp.png"));
+       Image iconoRedi = iconoOriginal.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+       this.setIconImage(iconoRedi);
+       this.setLocationRelativeTo(null);
        
     }
 
@@ -34,14 +40,18 @@ public class JavaMainClass extends javax.swing.JFrame {
         jdpEscritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jmAlumno = new javax.swing.JMenu();
+        jmiForAlumno = new javax.swing.JMenuItem();
         jmMateria = new javax.swing.JMenu();
+        jmiForMateria = new javax.swing.JMenuItem();
         jmInscripcion = new javax.swing.JMenu();
+        jmiManejoInscrip = new javax.swing.JMenuItem();
+        jmiManipulacionNotas = new javax.swing.JMenuItem();
         jmConsultas = new javax.swing.JMenu();
-        jmiListarInscrip = new javax.swing.JMenuItem();
-        jmiCargarNota = new javax.swing.JMenuItem();
+        jmiAlumPorMateria = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema de Gestión (SGULP)");
 
         jdpEscritorio.setPreferredSize(new java.awt.Dimension(563, 410));
 
@@ -66,6 +76,11 @@ public class JavaMainClass extends javax.swing.JFrame {
                 jmAlumnoMenuSelected(evt);
             }
         });
+
+        jmiForAlumno.setText("Formulario de Alumno");
+        jmiForAlumno.addActionListener(this::jmiForAlumnoActionPerformed);
+        jmAlumno.add(jmiForAlumno);
+
         jMenuBar1.add(jmAlumno);
 
         jmMateria.setText("Materia");
@@ -78,6 +93,11 @@ public class JavaMainClass extends javax.swing.JFrame {
                 jmMateriaMenuSelected(evt);
             }
         });
+
+        jmiForMateria.setText("Formulario de Materia");
+        jmiForMateria.addActionListener(this::jmiForMateriaActionPerformed);
+        jmMateria.add(jmiForMateria);
+
         jMenuBar1.add(jmMateria);
 
         jmInscripcion.setText("Inscripcion");
@@ -90,18 +110,23 @@ public class JavaMainClass extends javax.swing.JFrame {
                 jmInscripcionMenuSelected(evt);
             }
         });
+
+        jmiManejoInscrip.setText("Manejo de Inscripciones");
+        jmiManejoInscrip.addActionListener(this::jmiManejoInscripActionPerformed);
+        jmInscripcion.add(jmiManejoInscrip);
+
+        jmiManipulacionNotas.setText("Manipulación de notas");
+        jmiManipulacionNotas.addActionListener(this::jmiManipulacionNotasActionPerformed);
+        jmInscripcion.add(jmiManipulacionNotas);
+
         jMenuBar1.add(jmInscripcion);
 
         jmConsultas.setText("Consultas");
         jmConsultas.addActionListener(this::jmConsultasActionPerformed);
 
-        jmiListarInscrip.setText("Listar Inscripciones");
-        jmiListarInscrip.addActionListener(this::jmiListarInscripActionPerformed);
-        jmConsultas.add(jmiListarInscrip);
-
-        jmiCargarNota.setText("Cargar Nota");
-        jmiCargarNota.addActionListener(this::jmiCargarNotaActionPerformed);
-        jmConsultas.add(jmiCargarNota);
+        jmiAlumPorMateria.setText("Alumnos por Materia");
+        jmiAlumPorMateria.addActionListener(this::jmiAlumPorMateriaActionPerformed);
+        jmConsultas.add(jmiAlumPorMateria);
 
         jMenuBar1.add(jmConsultas);
 
@@ -143,53 +168,65 @@ public class JavaMainClass extends javax.swing.JFrame {
     }//GEN-LAST:event_jmSalirMenuSelected
 
     private void jmMateriaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmMateriaMenuSelected
-        jdpEscritorio.removeAll();
-        jdpEscritorio.repaint();
-        VistaMateria ventana = new VistaMateria();
-        ventana.setVisible(true);
-        jdpEscritorio.add(ventana);
-        jdpEscritorio.moveToFront(ventana);
+        
     }//GEN-LAST:event_jmMateriaMenuSelected
 
     private void jmAlumnoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmAlumnoMenuSelected
-        jdpEscritorio.removeAll();
-        jdpEscritorio.repaint();
-        VistaAlumno ventana = new VistaAlumno();
-        ventana.setVisible(true);
-        jdpEscritorio.add(ventana);
-        jdpEscritorio.moveToFront(ventana);
+        
     }//GEN-LAST:event_jmAlumnoMenuSelected
 
     private void jmInscripcionMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmInscripcionMenuSelected
-        jdpEscritorio.removeAll();
-        jdpEscritorio.repaint();
-        VistaInscripcion ventana = new VistaInscripcion();
-        ventana.setVisible(true);
-        jdpEscritorio.add(ventana);
-        jdpEscritorio.moveToFront(ventana);
+        
     }//GEN-LAST:event_jmInscripcionMenuSelected
 
     private void jmConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultasActionPerformed
         
     }//GEN-LAST:event_jmConsultasActionPerformed
 
-    private void jmiListarInscripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListarInscripActionPerformed
-       /* jdpEscritorio.removeAll();
+    private void jmiAlumPorMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAlumPorMateriaActionPerformed
+        jdpEscritorio.removeAll();
         jdpEscritorio.repaint();
         VistaListarInscripciones ventana = new VistaListarInscripciones();
         ventana.setVisible(true);
         jdpEscritorio.add(ventana);
-        jdpEscritorio.moveToFront(ventana);*/
-    }//GEN-LAST:event_jmiListarInscripActionPerformed
+        jdpEscritorio.moveToFront(ventana);
+    }//GEN-LAST:event_jmiAlumPorMateriaActionPerformed
 
-    private void jmiCargarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCargarNotaActionPerformed
-       /* jdpEscritorio.removeAll();
+    private void jmiForAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiForAlumnoActionPerformed
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        VistaAlumno ventana = new VistaAlumno();
+        ventana.setVisible(true);
+        jdpEscritorio.add(ventana);
+        jdpEscritorio.moveToFront(ventana);
+    }//GEN-LAST:event_jmiForAlumnoActionPerformed
+
+    private void jmiForMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiForMateriaActionPerformed
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        VistaMateria ventana = new VistaMateria();
+        ventana.setVisible(true);
+        jdpEscritorio.add(ventana);
+        jdpEscritorio.moveToFront(ventana);
+    }//GEN-LAST:event_jmiForMateriaActionPerformed
+
+    private void jmiManejoInscripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiManejoInscripActionPerformed
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        VistaInscripcion ventana = new VistaInscripcion();
+        ventana.setVisible(true);
+        jdpEscritorio.add(ventana);
+        jdpEscritorio.moveToFront(ventana);
+    }//GEN-LAST:event_jmiManejoInscripActionPerformed
+
+    private void jmiManipulacionNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiManipulacionNotasActionPerformed
+     /* jdpEscritorio.removeAll();
         jdpEscritorio.repaint();
         VistaCargaNotas ventana = new VistaCargaNotas();
         ventana.setVisible(true);
         jdpEscritorio.add(ventana);
         jdpEscritorio.moveToFront(ventana);*/
-    }//GEN-LAST:event_jmiCargarNotaActionPerformed
+    }//GEN-LAST:event_jmiManipulacionNotasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,7 +279,10 @@ public class JavaMainClass extends javax.swing.JFrame {
     private javax.swing.JMenu jmInscripcion;
     private javax.swing.JMenu jmMateria;
     private javax.swing.JMenu jmSalir;
-    private javax.swing.JMenuItem jmiCargarNota;
-    private javax.swing.JMenuItem jmiListarInscrip;
+    private javax.swing.JMenuItem jmiAlumPorMateria;
+    private javax.swing.JMenuItem jmiForAlumno;
+    private javax.swing.JMenuItem jmiForMateria;
+    private javax.swing.JMenuItem jmiManejoInscrip;
+    private javax.swing.JMenuItem jmiManipulacionNotas;
     // End of variables declaration//GEN-END:variables
 }

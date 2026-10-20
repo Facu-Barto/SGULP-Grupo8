@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import Modelo.Materia;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -65,4 +67,33 @@ public class MateriaData {
 
     return m;
 }
+    public List<Materia> listarMaterias() {
+    List<Materia> materias = new ArrayList<>();
+    String sql = "SELECT * FROM materia WHERE estado = 1"; // Asumiendo que el campo lógico es 'estado'
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Materia m = new Materia();
+            
+            m.setId_materia(rs.getInt("id_materia"));
+            m.setNombre(rs.getString("nombre"));
+            m.setAnio(rs.getInt("anio"));
+            m.setEstado(rs.getBoolean("estado")); // O setActivo según cómo lo tengas en tu modelo
+
+            materias.add(m); 
+        }
+        
+        ps.close();
+
+    } catch (SQLException ex) {
+        Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, "Error al listar materias", ex);
+        JOptionPane.showMessageDialog(null, "Error al obtener la lista de materias: " + ex.getMessage());
+    }
+
+    return materias;
+}
+
 }

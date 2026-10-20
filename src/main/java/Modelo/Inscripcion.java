@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.time.LocalDate;
+
 public class Inscripcion {
 
     private int id_cursada;
@@ -33,7 +35,7 @@ public class Inscripcion {
         this.id_materia = materia;
         this.nota = 0;
         this.asistencia = 0;
-        this.cursa = 0;
+        this.cursa = LocalDate.now().getYear();
     }
     
     

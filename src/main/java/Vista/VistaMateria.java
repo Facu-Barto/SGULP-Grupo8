@@ -1,12 +1,20 @@
 package Vista;
 
+import Modelo.Materia;
+import Persistencia.MateriaData;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class VistaMateria extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form VistaMateria
-     */
+    private DefaultTableModel modelo = new DefaultTableModel();
+    private MateriaData materiaData = new MateriaData();
+    private Materia materiaActual = new Materia();
     public VistaMateria() {
         initComponents();
+        armarCabecera();
+        cargarTabla();
     }
 
     /**
@@ -19,23 +27,31 @@ public class VistaMateria extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jbBuscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         txt_nombre = new javax.swing.JLabel();
         txt_code = new javax.swing.JLabel();
-        field_nombremateria = new javax.swing.JTextField();
-        field_idmateria = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jtfNombre = new javax.swing.JTextField();
+        jtfID = new javax.swing.JTextField();
+        jbNuevo = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
+        jbBorrar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         tittle1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtMaterias = new javax.swing.JTable();
+        jrbEstado = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        jbSalir = new javax.swing.JButton();
 
         setTitle("Vista de Materias");
 
         jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(this::jbBuscarActionPerformed);
+        jDesktopPane1.add(jbBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 100, 50));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Listado de Materias");
@@ -48,27 +64,30 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         txt_code.setText("Código / ID");
         jDesktopPane1.add(txt_code, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
-        field_nombremateria.setText("Nombre de materia");
-        jDesktopPane1.add(field_nombremateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 180, -1));
+        jtfNombre.setText("Nombre de materia");
+        jDesktopPane1.add(jtfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 180, -1));
 
-        field_idmateria.setText("ID de materia");
-        jDesktopPane1.add(field_idmateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 180, -1));
+        jtfID.setText("ID de materia");
+        jDesktopPane1.add(jtfID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 180, -1));
 
-        jButton2.setText("Nuevo");
-        jDesktopPane1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 100, 50));
+        jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(this::jbNuevoActionPerformed);
+        jDesktopPane1.add(jbNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 100, 50));
 
-        jButton3.setText("Actualizar");
-        jDesktopPane1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 100, 50));
+        jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(this::jbGuardarActionPerformed);
+        jDesktopPane1.add(jbGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 100, 50));
 
-        jButton4.setText("Borrar");
-        jDesktopPane1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, 100, 50));
+        jbBorrar.setText("Borrar");
+        jbBorrar.addActionListener(this::jbBorrarActionPerformed);
+        jDesktopPane1.add(jbBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 100, 50));
         jDesktopPane1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 33, 580, 10));
 
         tittle1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tittle1.setText("Gestión de Materias");
         jDesktopPane1.add(tittle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -87,9 +106,17 @@ public class VistaMateria extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtMaterias);
 
         jDesktopPane1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 550, 110));
+        jDesktopPane1.add(jrbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, -1));
+
+        jLabel1.setText("Estado");
+        jDesktopPane1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 50, -1));
+
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(this::jbSalirActionPerformed);
+        jDesktopPane1.add(jbSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 100, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,27 +126,133 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        if (jtfID.getText().isEmpty() || jtfID.getText().equalsIgnoreCase("ID de materia")) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese el ID de la materia que desea buscar");
+            return;
+        }
+        try{
+        int id = Integer.parseInt(jtfID.getText());
+        
+        materiaActual = materiaData.buscarMateria(id);
+        
+        if (materiaActual != null) {
+            jtfNombre.setText(materiaActual.getNombre());
+            jrbEstado.setSelected(materiaActual.isEstado());
+        }else{
+            JOptionPane.showMessageDialog(this, "No se encontro esta materia");
+        }
+        
+        }catch(NumberFormatException x){
+            JOptionPane.showMessageDialog(this, "El ID solo puede contener numeros enteros"+x.getMessage());
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+       dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        String nombre = jtfNombre.getText().trim();
+        boolean estado = jrbEstado.isSelected();
+        if (nombre.isEmpty()||nombre.equalsIgnoreCase("Nombre de Materia")) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese un nombre valido para la materia");
+            return;
+        }
+        try{
+            if (materiaActual == null) {
+                
+                Materia nuevaMateria = new Materia(nombre,estado);
+                materiaData.guardarMateria(nuevaMateria);
+                JOptionPane.showMessageDialog(this, "Materia guardada exitosamente");
+            }else{
+                materiaActual.setNombre(nombre);
+                materiaActual.setEstado(estado);
+                materiaData.modificarMateria(materiaActual);
+            }
+            limpiarCampos();
+            cargarTabla();
+            materiaActual=null;
+            
+        }catch(Exception x){
+            JOptionPane.showMessageDialog(this, "Error al procesar la materia"+ x.getMessage());
+        }
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
+        if (materiaActual != null) {
+            int confirm = JOptionPane.showConfirmDialog(this, 
+                "¿Desea dar de baja la materia '" + materiaActual.getNombre() + "'?", 
+                "Confirmar Baja", 
+                JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                materiaActual.setEstado(false); 
+                materiaData.modificarMateria(materiaActual); 
+            
+                limpiarCampos();
+                cargarTabla();
+                materiaActual = null;
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe buscar o seleccionar una materia primero para darla de baja.");
+        }
+    }//GEN-LAST:event_jbBorrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField field_idmateria;
-    private javax.swing.JTextField field_nombremateria;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbBorrar;
+    private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbNuevo;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JRadioButton jrbEstado;
+    private javax.swing.JTable jtMaterias;
+    private javax.swing.JTextField jtfID;
+    private javax.swing.JTextField jtfNombre;
     private javax.swing.JLabel tittle1;
     private javax.swing.JLabel txt_code;
     private javax.swing.JLabel txt_nombre;
     // End of variables declaration//GEN-END:variables
+
+    private void armarCabecera() {
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Estado");
+        jtMaterias.setModel(modelo);
+    }
+
+    private void cargarTabla() {
+        modelo.setRowCount(0);
+        List<Materia> listaMateria = materiaData.listarMaterias();
+        for (Materia m : listaMateria) {
+            modelo.addRow(new Object[]{
+                m.getId_materia(),
+                m.getNombre(),
+                m.isEstado()
+            });
+        }
+    }
+    
+    private void limpiarCampos(){
+        jtfID.setText("");
+        jtfNombre.setText("");
+        jrbEstado.setSelected(false);
+    }
 }

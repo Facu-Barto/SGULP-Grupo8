@@ -96,4 +96,28 @@ public class MateriaData {
     return materias;
 }
 
+    public void modificarMateria(Materia materia) {
+    
+    String sql = "UPDATE materia SET nombre = ?, estado = ? WHERE id_materia = ?";
+    
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, materia.getNombre());
+        ps.setBoolean(2, materia.isEstado());
+        ps.setInt(3, materia.getId_materia());
+        
+        int filasModificadas = ps.executeUpdate();
+        
+        if (filasModificadas > 0) {
+            JOptionPane.showMessageDialog(null, "Materia actualizada correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró la materia a modificar.");
+        }
+        
+        ps.close();
+        
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia: " + ex.getMessage());
+    }
+}
 }

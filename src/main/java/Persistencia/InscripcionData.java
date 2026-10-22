@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class InscripcionData {
@@ -17,7 +19,28 @@ public class InscripcionData {
     public InscripcionData() {
         con = Conexion.getConexion();
     }
-
+    public List MateriasNoInscriptas(int id)
+    {
+       List materias = new ArrayList<Materia>(); 
+       String sql = "SELECT * FROM materia\n" +"WHERE estado = 1\n"+"AND id_materia NOT IN (SELECT id_materia FROM inscripcion WHERE id_alumno = ?)"; 
+       try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1,id);
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Materia m = new Materia();
+                m.setId_materia(rs.getInt("id_materia"));
+                m.setNombre(rs.getString("nombre"));
+                m.setAnio(rs.getInt("anio"));
+                m.setEstado(rs.getBoolean("estado"));
+                materias.add(m);
+            }
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, "Error al obtener materias no inscriptas", ex);
+        JOptionPane.showMessageDialog(null, "Error al consultar la base de datos: " + ex.getMessage());
+    }
+    return materias;
+     }
     public void guardarInscripcion(Inscripcion i) {
         String sql = "INSERT INTO inscripcion(id_alumno, id_materia, nota, asistencia, cursa) VALUES (?, ?, ?, ?, ?)";
         
@@ -41,7 +64,18 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null, "Error al registrar la inscripción: " + ex.getMessage());
         }
     }
-   
+   public boolean borrarInscripcion(int idCursada) {
+    String sql = "DELETE FROM inscripcion WHERE id_cursada = ?";
+
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, idCursada);
+        return ps.executeUpdate() > 0;
+    } catch (SQLException ex) {
+        Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, "Error al borrar inscripción", ex);
+        JOptionPane.showMessageDialog(null, "Error al borrar la inscripción: " + ex.getMessage());
+        return false;
+    }
+}
     public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
     List<Inscripcion> cursadas = new ArrayList<>();
     String sql = "SELECT i.id_cursada, i.nota, i.asistencia, i.cursa, " +

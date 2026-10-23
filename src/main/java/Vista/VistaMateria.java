@@ -10,7 +10,8 @@ public class VistaMateria extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel();
     private MateriaData materiaData = new MateriaData();
-    private Materia materiaActual = new Materia();
+    private Materia materiaActual = null;
+    
     public VistaMateria() {
         initComponents();
         armarCabecera();

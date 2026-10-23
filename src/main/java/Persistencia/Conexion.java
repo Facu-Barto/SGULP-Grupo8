@@ -13,7 +13,7 @@ public class Conexion {
     
     private static Connection conexion = null;
 
-    private Conexion() {}
+    public Conexion() {}
 
     public static Connection getConexion() {
         if (conexion == null) {

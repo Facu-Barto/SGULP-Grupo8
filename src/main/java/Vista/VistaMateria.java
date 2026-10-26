@@ -133,35 +133,29 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        limpiarCampos();
-    }//GEN-LAST:event_jbNuevoActionPerformed
-
-    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        if (jtfID.getText().isEmpty() || jtfID.getText().equalsIgnoreCase("ID de materia")) {
-            JOptionPane.showMessageDialog(this, "Por favor ingrese el ID de la materia que desea buscar");
-            return;
-        }
-        try{
-        int id = Integer.parseInt(jtfID.getText());
-        
-        materiaActual = materiaData.buscarMateria(id);
-        
-        if (materiaActual != null) {
-            jtfNombre.setText(materiaActual.getNombre());
-            jrbEstado.setSelected(materiaActual.isEstado());
-        }else{
-            JOptionPane.showMessageDialog(this, "No se encontro esta materia");
-        }
-        
-        }catch(NumberFormatException x){
-            JOptionPane.showMessageDialog(this, "El ID solo puede contener numeros enteros"+x.getMessage());
-        }
-    }//GEN-LAST:event_jbBuscarActionPerformed
-
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
+        if (materiaActual != null) {
+            int confirm = JOptionPane.showConfirmDialog(this,
+                "¿Desea dar de baja la materia '" + materiaActual.getNombre() + "'?",
+                "Confirmar Baja",
+                JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                materiaActual.setEstado(false);
+                materiaData.modificarMateria(materiaActual);
+
+                limpiarCampos();
+                cargarTabla();
+                materiaActual = null;
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe buscar o seleccionar una materia primero para darla de baja.");
+        }
+    }//GEN-LAST:event_jbBorrarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         String nombre = jtfNombre.getText().trim();
@@ -172,7 +166,7 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         }
         try{
             if (materiaActual == null) {
-                
+
                 Materia nuevaMateria = new Materia(nombre,estado);
                 materiaData.guardarMateria(nuevaMateria);
                 JOptionPane.showMessageDialog(this, "Materia guardada exitosamente");
@@ -184,31 +178,37 @@ public class VistaMateria extends javax.swing.JInternalFrame {
             limpiarCampos();
             cargarTabla();
             materiaActual=null;
-            
+
         }catch(Exception x){
             JOptionPane.showMessageDialog(this, "Error al procesar la materia"+ x.getMessage());
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
-    private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
-        if (materiaActual != null) {
-            int confirm = JOptionPane.showConfirmDialog(this, 
-                "¿Desea dar de baja la materia '" + materiaActual.getNombre() + "'?", 
-                "Confirmar Baja", 
-                JOptionPane.YES_NO_OPTION);
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_jbNuevoActionPerformed
 
-            if (confirm == JOptionPane.YES_OPTION) {
-                materiaActual.setEstado(false); 
-                materiaData.modificarMateria(materiaActual); 
-            
-                limpiarCampos();
-                cargarTabla();
-                materiaActual = null;
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Debe buscar o seleccionar una materia primero para darla de baja.");
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        if (jtfID.getText().isEmpty() || jtfID.getText().equalsIgnoreCase("ID de materia")) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese el ID de la materia que desea buscar");
+            return;
         }
-    }//GEN-LAST:event_jbBorrarActionPerformed
+        try{
+            int id = Integer.parseInt(jtfID.getText());
+
+            materiaActual = materiaData.buscarMateria(id);
+
+            if (materiaActual != null) {
+                jtfNombre.setText(materiaActual.getNombre());
+                jrbEstado.setSelected(materiaActual.isEstado());
+            }else{
+                JOptionPane.showMessageDialog(this, "No se encontro esta materia");
+            }
+
+        }catch(NumberFormatException x){
+            JOptionPane.showMessageDialog(this, "El ID solo puede contener numeros enteros"+x.getMessage());
+        }
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

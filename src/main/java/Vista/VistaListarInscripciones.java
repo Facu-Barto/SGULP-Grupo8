@@ -134,6 +134,7 @@ public class VistaListarInscripciones extends javax.swing.JInternalFrame {
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
+        modelo.addColumn("Fecha Nacimiento");
         jtAlumnos.setModel(modelo);
     }
 
@@ -142,15 +143,19 @@ public class VistaListarInscripciones extends javax.swing.JInternalFrame {
         if (materiaSeleccionada == null) {
             return;
         }
+
         modelo.setRowCount(0);
-       /* List<Alumno> listaAlumnos = inscripcionData.obtenerAlumnosPorMateria(materiaSeleccionada.getId_materia());
+
+        List<Alumno> listaAlumnos = inscripcionData.obtenerAlumnosPorMateria(materiaSeleccionada.getId_materia());
+
         for (Alumno x : listaAlumnos) {
             modelo.addRow(new Object[]{
                 x.getId_alumno(),
                 x.getDni(),
                 x.getApellido(),
-                x.getNombre()
-                });
-        }*/
+                x.getNombre(),
+                x.getFecha_nacimiento()
+            });
+        }
     }
 }

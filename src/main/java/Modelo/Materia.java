@@ -25,8 +25,6 @@ public class Materia {
         this.nombre = nombre;
         this.estado = estado;
     }
-    
-    
 
     public int getId_materia() {
         return id_materia;
@@ -62,6 +60,6 @@ public class Materia {
 
     @Override
     public String toString() {
-        return nombre;
-    } 
+        return nombre + " (Año " + anio + ")";
+    }
 }

@@ -67,15 +67,6 @@ public class JavaMainClass extends javax.swing.JFrame {
         );
 
         jmAlumno.setText("Alumno");
-        jmAlumno.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jmAlumnoMenuSelected(evt);
-            }
-        });
 
         jmiForAlumno.setText("Formulario de Alumno");
         jmiForAlumno.addActionListener(this::jmiForAlumnoActionPerformed);
@@ -84,15 +75,6 @@ public class JavaMainClass extends javax.swing.JFrame {
         jMenuBar1.add(jmAlumno);
 
         jmMateria.setText("Materia");
-        jmMateria.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jmMateriaMenuSelected(evt);
-            }
-        });
 
         jmiForMateria.setText("Formulario de Materia");
         jmiForMateria.addActionListener(this::jmiForMateriaActionPerformed);
@@ -101,15 +83,6 @@ public class JavaMainClass extends javax.swing.JFrame {
         jMenuBar1.add(jmMateria);
 
         jmInscripcion.setText("Inscripcion");
-        jmInscripcion.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jmInscripcionMenuSelected(evt);
-            }
-        });
 
         jmiManejoInscrip.setText("Manejo de Inscripciones");
         jmiManejoInscrip.addActionListener(this::jmiManejoInscripActionPerformed);
@@ -122,7 +95,6 @@ public class JavaMainClass extends javax.swing.JFrame {
         jMenuBar1.add(jmInscripcion);
 
         jmConsultas.setText("Consultas");
-        jmConsultas.addActionListener(this::jmConsultasActionPerformed);
 
         jmiAlumPorMateria.setText("Alumnos por Materia");
         jmiAlumPorMateria.addActionListener(this::jmiAlumPorMateriaActionPerformed);
@@ -140,7 +112,6 @@ public class JavaMainClass extends javax.swing.JFrame {
                 jmSalirMenuSelected(evt);
             }
         });
-        jmSalir.addActionListener(this::jmSalirActionPerformed);
         jMenuBar1.add(jmSalir);
 
         setJMenuBar(jMenuBar1);
@@ -159,29 +130,9 @@ public class JavaMainClass extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
-        
-    }//GEN-LAST:event_jmSalirActionPerformed
-
     private void jmSalirMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmSalirMenuSelected
         System.exit(0);
     }//GEN-LAST:event_jmSalirMenuSelected
-
-    private void jmMateriaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmMateriaMenuSelected
-        
-    }//GEN-LAST:event_jmMateriaMenuSelected
-
-    private void jmAlumnoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmAlumnoMenuSelected
-        
-    }//GEN-LAST:event_jmAlumnoMenuSelected
-
-    private void jmInscripcionMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jmInscripcionMenuSelected
-        
-    }//GEN-LAST:event_jmInscripcionMenuSelected
-
-    private void jmConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultasActionPerformed
-        
-    }//GEN-LAST:event_jmConsultasActionPerformed
 
     private void jmiAlumPorMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAlumPorMateriaActionPerformed
         jdpEscritorio.removeAll();
@@ -220,21 +171,21 @@ public class JavaMainClass extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiManejoInscripActionPerformed
 
     private void jmiManipulacionNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiManipulacionNotasActionPerformed
-     /* jdpEscritorio.removeAll();
+        jdpEscritorio.removeAll();
         jdpEscritorio.repaint();
-        VistaCargaNotas ventana = new VistaCargaNotas();
+        VistaCargarNotas ventana = new VistaCargarNotas();
         ventana.setVisible(true);
         jdpEscritorio.add(ventana);
-        jdpEscritorio.moveToFront(ventana);*/
+        jdpEscritorio.moveToFront(ventana);
     }//GEN-LAST:event_jmiManipulacionNotasActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-     /*   AlumnoData alumnoData = new AlumnoData();
-       MateriaData materiaData = new MateriaData();
-       InscripcionData inscripcionData = new InscripcionData();
+     /* AlumnoData alumnoData = new AlumnoData();
+        MateriaData materiaData = new MateriaData();
+        InscripcionData inscripcionData = new InscripcionData();
 
         Alumno alumno = new Alumno(52745628, "Juan", "López", LocalDate.of(2000, Month.AUGUST, 29), true);
         alumnoData.guardarAlumno(alumno);
@@ -245,7 +196,7 @@ public class JavaMainClass extends javax.swing.JFrame {
         Inscripcion inscripcion = new Inscripcion(alumno, materia, 9.5f, 85, 2026);
         inscripcionData.guardarInscripcion(inscripcion);
 
-        System.out.println("\n---Lista De Alumnos Activos---");
+        System.out.println("Lista De Alumnos Activos");
         List<Alumno> activos = alumnoData.listarAlumnos();
         for (Alumno a : activos) {
             System.out.println(a);

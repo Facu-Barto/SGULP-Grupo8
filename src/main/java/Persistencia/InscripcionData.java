@@ -1,5 +1,6 @@
 package Persistencia;
 
+import Modelo.Alumno;
 import Modelo.Inscripcion;
 import Modelo.Materia;
 import java.sql.Connection;
@@ -133,5 +134,32 @@ public class InscripcionData {
             Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, "Error al actualizar nota", ex);
             JOptionPane.showMessageDialog(null, "Error al actualizar la nota: " + ex.getMessage());
         }
+    }
+    
+    public List<Alumno> obtenerAlumnosPorMateria(int idMateria) {
+        List<Alumno> alumnos = new ArrayList<>();
+        String sql = "SELECT a.id_alumno, a.dni, a.apellido, a.nombre, a.fecha_nacimiento, a.activo "
+                + "FROM alumno a "
+                + "JOIN inscripcion i ON a.id_alumno = i.id_alumno "
+                + "WHERE i.id_materia = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, idMateria);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Alumno a = new Alumno();
+                    a.setId_alumno(rs.getInt("id_alumno"));
+                    a.setDni(rs.getInt("dni"));
+                    a.setApellido(rs.getString("apellido"));
+                    a.setNombre(rs.getString("nombre"));
+                    a.setFecha_nacimiento(rs.getDate("fecha_nacimiento").toLocalDate());
+                    a.setActivo(rs.getBoolean("activo"));
+                    alumnos.add(a);
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener alumnos por materia: " + ex.getMessage());
+        }
+        return alumnos;
     }
 }

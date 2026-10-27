@@ -16,12 +16,11 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
     private ArrayList<Alumno> listaAlumno;
     private DefaultTableModel modelo = new DefaultTableModel();
     private InscripcionData inscripcionData = new InscripcionData();
+    
     public VistaInscripcion() {
         initComponents();
         cargarAlumnos();
-        armarCabecera();
-        
-        
+        armarCabecera(); 
     }
 
     /**
@@ -198,20 +197,16 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
             return;
         }
     
-   
         Alumno alumnoSeleccionado = (Alumno) jcbAlumno.getSelectedItem();
         if (alumnoSeleccionado == null) {
             JOptionPane.showMessageDialog(null, "Por selección de alumno inválida.");
             return;
         }
     
-    
         int idCursada = (Integer) jtMaterias.getValueAt(filaSeleccionada, 0);
     
     
-        /*inscripcionData.borrarInscripcion(idCursada);*/
-    
-    
+        inscripcionData.borrarInscripcion(idCursada);
         cargarTabla();
     }//GEN-LAST:event_jbAnularActionPerformed
 
@@ -238,8 +233,8 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
         for (Alumno alumno : listaAlumno) {
             jcbAlumno.addItem(alumno);
         }
-        
     }
+    
     private void armarCabecera(){
         modelo.addColumn("idCursada");
         modelo.addColumn("ID");
@@ -251,6 +246,7 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
         jtMaterias.getColumnModel().getColumn(0).setMinWidth(0);
         jtMaterias.getColumnModel().getColumn(0).setPreferredWidth(0);
     }
+    
     private void cargarTabla(){
         Alumno alumnoSeleccionado = (Alumno) jcbAlumno.getSelectedItem();
     
@@ -276,20 +272,19 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
             jbInscribir.setEnabled(false);
         
         } else {
-        
-           /* List<Materia> listaMaterias = inscripcionData.obtenerMateriasNoInscriptas(alumnoSeleccionado.getId_alumno());
+            List<Materia> listaMaterias = inscripcionData.materiasNoInscriptas(alumnoSeleccionado.getId_alumno());
         
             for (Materia m : listaMaterias) {
                 modelo.addRow(new Object[]{
-                    null,                
+                    m.getId_materia(),                
                     m.getId_materia(),   
                     m.getNombre(),       
                     m.getAnio()          
                 });
-            }*/
+            }
         
         jbAnular.setEnabled(false);
         jbInscribir.setEnabled(true);
-    }
+        }
     }
 } 

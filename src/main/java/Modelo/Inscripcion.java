@@ -38,8 +38,6 @@ public class Inscripcion {
         this.cursa = LocalDate.now().getYear();
     }
     
-    
-
     public int getId_cursada() {
         return id_cursada;
     }
@@ -90,12 +88,6 @@ public class Inscripcion {
 
     @Override
     public String toString() {
-        return "Inscripcion: " 
-                + "id_cursada: " + id_cursada 
-                + " id_alumno: " + id_alumno 
-                + " id_materia: " + id_materia 
-                + " nota: " + nota 
-                + " asistencia: " + asistencia 
-                + " cursa: " + cursa;
+        return "Cursada ID: " + id_cursada + " - Alumno: " + id_alumno.getApellido() + " (" + id_materia.getNombre() + ") - Nota: " + nota;
     }
 }

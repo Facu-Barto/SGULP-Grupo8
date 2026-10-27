@@ -17,7 +17,31 @@ public class VistaMateria extends javax.swing.JInternalFrame {
         armarCabecera();
         cargarTabla();
     }
+    
+    private void armarCabecera() {
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Estado");
+        jtMaterias.setModel(modelo);
+    }
 
+    private void cargarTabla() {
+        modelo.setRowCount(0);
+        List<Materia> listaMateria = materiaData.listarMaterias();
+        for (Materia m : listaMateria) {
+            modelo.addRow(new Object[]{
+                m.getId_materia(),
+                m.getNombre(),
+                m.isEstado()
+            });
+        }
+    }
+    
+    private void limpiarCampos(){
+        jtfID.setText("");
+        jtfNombre.setText("");
+        jrbEstado.setSelected(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -232,28 +256,5 @@ public class VistaMateria extends javax.swing.JInternalFrame {
     private javax.swing.JLabel txt_nombre;
     // End of variables declaration//GEN-END:variables
 
-    private void armarCabecera() {
-        modelo.addColumn("ID");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Estado");
-        jtMaterias.setModel(modelo);
-    }
-
-    private void cargarTabla() {
-        modelo.setRowCount(0);
-        List<Materia> listaMateria = materiaData.listarMaterias();
-        for (Materia m : listaMateria) {
-            modelo.addRow(new Object[]{
-                m.getId_materia(),
-                m.getNombre(),
-                m.isEstado()
-            });
-        }
-    }
     
-    private void limpiarCampos(){
-        jtfID.setText("");
-        jtfNombre.setText("");
-        jrbEstado.setSelected(false);
-    }
 }
